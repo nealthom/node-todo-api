@@ -7,16 +7,16 @@ const {User} = require('./../../models/user');
 const userOneId = new ObjectID();
 const userTwoId = new ObjectID();
 const users = [{
-  _id : userOneId,
-  email: 'nealthom@gmail.com',
+  _id: userOneId,
+  email: 'andrew@example.com',
   password: 'userOnePass',
-  tokens:[{
+  tokens: [{
     access: 'auth',
-    token:  jwt.sign({_id: userOneId, access: 'auth'}, 'abc123').toString()
+    token: jwt.sign({_id: userOneId, access: 'auth'}, 'abc123').toString()
   }]
-},{
-  _id : userTwoId,
-  email: 'amanda@example.com',
+}, {
+  _id: userTwoId,
+  email: 'jen@example.com',
   password: 'userTwoPass'
 }];
 
@@ -36,18 +36,13 @@ const populateTodos = (done) => {
   }).then(() => done());
 };
 
-const populateUsers = (done) =>{
-  User.remove({}).then(()=>{
-    let userOne = new User(users[0]).save();
-    let userTwo = new User(users[1]).save();
+const populateUsers = (done) => {
+  User.remove({}).then(() => {
+    var userOne = new User(users[0]).save();
+    var userTwo = new User(users[1]).save();
 
-    return Promise.all([userOne,userTwo]);
-  }).then(()=>done());
+    return Promise.all([userOne, userTwo])
+  }).then(() => done());
 };
 
-module.exports = {
-  todos,
-  populateTodos,
-  users,
-  populateUsers
-}
+module.exports = {todos, populateTodos, users, populateUsers};
